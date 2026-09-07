@@ -1,0 +1,9 @@
+slug: parish-church
+displayName: "Parish Church"
+tiers:
+  - economy
+demoUrl: "/parish-church"
+seedVersion: "1.0.0"
+isDefault: true
+category: "tier"
+description: "Economy default — the volume seller, ~10 pages."

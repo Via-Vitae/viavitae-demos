@@ -1,0 +1,89 @@
+name: "Feature request"
+description: "Propose a new feature, page, or component for one or more demo templates"
+title: "feat(<scope>): <summary>"
+labels: ["type: enhancement"]
+projects: ["Via-Vitae/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting an improvement. Before submitting, check
+        existing issues to avoid duplicates. For a **new vertical demo
+        template**, use the "New demo template" form instead.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What problem does this feature solve? Who is affected?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe the feature or change you would like to see.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What other approaches did you consider?
+
+  - type: dropdown
+    id: affected-templates
+    attributes:
+      label: Which templates would this affect?
+      multiple: true
+      options:
+        - basilica (VIP)
+        - cathedral (Normal)
+        - diocese
+        - deaneries
+        - parish-church (Economy)
+        - funeral-services
+        - cemetery-services
+        - online-store
+        - vendor-dashboard
+        - shared/ (all templates)
+
+  - type: dropdown
+    id: compliance-impact
+    attributes:
+      label: Compliance impact
+      description: Does this feature touch personal data, accessibility, or data residency?
+      options:
+        - No compliance impact
+        - Touches personal data (DPIA may be needed)
+        - Accessibility impact (WCAG 2.2 AA)
+        - Data residency or third-party processor change
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: i18n-impact
+    attributes:
+      label: Internationalisation impact
+      description: Does this add or change user-facing strings?
+      options:
+        - No new strings
+        - New strings in LT/EN/RU (all three required)
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Estimated scope
+      description: Rough estimate of the number of files, pages, or components involved.
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What must be true for this feature to be considered done?

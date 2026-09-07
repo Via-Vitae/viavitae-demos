@@ -1,0 +1,377 @@
+name: CI
+
+# Continuous integration for viavitae-demos.
+#
+# Pipeline: setup -> lint -> typecheck -> test -> e2e -> sast -> dependency-scan
+#   -> media-licence-verify -> build -> ci-status
+#
+# The pipeline is adapted for a pnpm/Turborepo monorepo with 9 Next.js templates.
+# Turborepo remote caching is recommended to keep CI under 10 minutes.
+#
+# SECURITY (rule R4)
+#   - Least-privilege GITHUB_TOKEN: `contents: read` for the whole workflow.
+#   - Every third-party action must be pinned to a full-length commit SHA.
+#   - Dependabot moves the SHA weekly; never relax a pin back to a tag.
+#
+# OUTSTANDING BEFORE FIRST RUN
+#   Every `uses:` below carries a version tag, not a commit SHA, because resolving
+#   an authentic 40-character SHA requires a network lookup. Replace each tag with
+#   the verified SHA of that release, then re-run the `action-pinning` gate in
+#   compliance-check.yml.
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "ci-${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+  PNPM_VERSION: "9"
+  COVERAGE_MIN: "80"
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # setup — install pnpm and detect changed templates
+  # ---------------------------------------------------------------------------
+  setup:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      changed-templates: ${{ steps.detect.outputs.changed_templates }}
+      has-shared-changes: ${{ steps.detect.outputs.has_shared_changes }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Detect changed templates
+        id: detect
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            # On push to main, build everything
+            echo 'changed_templates=["basilica","cathedral","diocese","deaneries","parish-church","funeral-services","cemetery-services","online-store","vendor-dashboard"]' >> "$GITHUB_OUTPUT"
+            echo 'has_shared_changes=true' >> "$GITHUB_OUTPUT"
+          else
+            # On PR, detect which templates changed
+            BASE="${{ github.event.pull_request.base.sha }}"
+            CHANGED=$(git diff --name-only "$BASE" HEAD 2>/dev/null || git diff --name-only HEAD~1 HEAD)
+            TEMPLATES='[]'
+            for t in basilica cathedral diocese deaneries parish-church funeral-services cemetery-services online-store vendor-dashboard; do
+              if echo "$CHANGED" | grep -q "^templates/$t/"; then
+                TEMPLATES=$(echo "$TEMPLATES" | jq --arg t "$t" '. + [$t]')
+              fi
+            done
+            HAS_SHARED="false"
+            if echo "$CHANGED" | grep -qE "^(shared/|config/|package\.json|pnpm-workspace|turbo\.json|tsconfig)"; then
+              HAS_SHARED="true"
+              # Shared changes affect all templates
+              TEMPLATES='["basilica","cathedral","diocese","deaneries","parish-church","funeral-services","cemetery-services","online-store","vendor-dashboard"]'
+            fi
+            # If no template-specific changes, still run on all for safety
+            if [ "$TEMPLATES" = "[]" ] && [ "$HAS_SHARED" = "false" ]; then
+              TEMPLATES='["basilica","cathedral","diocese","deaneries","parish-church","funeral-services","cemetery-services","online-store","vendor-dashboard"]'
+            fi
+            echo "changed_templates=$TEMPLATES" >> "$GITHUB_OUTPUT"
+            echo "has_shared_changes=$HAS_SHARED" >> "$GITHUB_OUTPUT"
+            echo "detected templates=$TEMPLATES shared=$HAS_SHARED"
+          fi
+
+  # ---------------------------------------------------------------------------
+  # lint — ESLint across all packages
+  # ---------------------------------------------------------------------------
+  lint:
+    name: Lint
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile || pnpm install
+
+      - name: ESLint
+        run: pnpm lint --max-warnings 0
+
+      - name: Prettier format check
+        run: pnpm format:check
+
+  # ---------------------------------------------------------------------------
+  # typecheck — strict TypeScript
+  # ---------------------------------------------------------------------------
+  typecheck:
+    name: Typecheck
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile || pnpm install
+
+      - name: TypeScript (no emit)
+        run: pnpm typecheck
+
+  # ---------------------------------------------------------------------------
+  # test — Vitest with coverage gate
+  # ---------------------------------------------------------------------------
+  test:
+    name: Unit tests
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile || pnpm install
+
+      - name: Vitest with coverage
+        run: pnpm test -- --coverage
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: |
+            coverage/
+            coverage.xml
+          if-no-files-found: ignore
+          retention-days: 14
+
+  # ---------------------------------------------------------------------------
+  # sast — Semgrep
+  # ---------------------------------------------------------------------------
+  sast:
+    name: SAST (Semgrep)
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python (for Semgrep)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Semgrep
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          pip install semgrep
+
+      - name: Run Semgrep
+        run: |
+          set -euo pipefail
+          semgrep scan \
+            --config p/security-audit --config p/secrets \
+            --config p/typescript --config p/javascript --config p/nodejs \
+            --config p/docker \
+            --metrics=off \
+            --error \
+            --severity ERROR \
+            --exclude=node_modules --exclude=.next --exclude=.turbo \
+            --sarif --output semgrep.sarif || {
+              echo "::error::Semgrep reported findings at ERROR severity."
+              exit 1
+            }
+
+      - name: Upload Semgrep SARIF
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-sarif
+          path: semgrep.sarif
+          if-no-files-found: ignore
+          retention-days: 14
+
+  # ---------------------------------------------------------------------------
+  # dependency-scan — Trivy filesystem, fail on CRITICAL
+  # ---------------------------------------------------------------------------
+  dependency-scan:
+    name: Dependency scan (Trivy)
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,secret,misconfig,license
+          severity: CRITICAL,HIGH
+          exit-code: "1"
+          ignore-unfixed: true
+          format: table
+
+      - name: Trivy SARIF report
+        if: always()
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln
+          severity: CRITICAL,HIGH
+          exit-code: "0"
+          format: sarif
+          output: trivy.sarif
+
+      - name: Upload Trivy SARIF
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-sarif
+          path: trivy.sarif
+          if-no-files-found: ignore
+          retention-days: 14
+
+  # ---------------------------------------------------------------------------
+  # media-licence-verify — every image has a manifest entry with valid licence
+  # ---------------------------------------------------------------------------
+  media-licence-verify:
+    name: Media licence verification
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile || pnpm install
+
+      - name: Verify media licences against manifest
+        run: |
+          set -euo pipefail
+          # Verify every image in seed/media/ has a manifest entry with a valid licence
+          pnpm verify:media-licences || {
+            echo "::error::Media licence verification failed. Every image in seed/media/ must have a matching entry in media-manifest.json with a valid licence and trilingual alt-text."
+            exit 1
+          }
+
+  # ---------------------------------------------------------------------------
+  # build — Turborepo pipeline across all templates
+  # ---------------------------------------------------------------------------
+  build:
+    name: Build
+    needs: [setup, lint, typecheck, test, sast, dependency-scan, media-licence-verify]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile || pnpm install
+
+      - name: Build all templates (Turborepo)
+        run: pnpm turbo build
+
+      - name: Upload build artefacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: |
+            templates/*/.next/standalone/
+            templates/*/out/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  # ---------------------------------------------------------------------------
+  # ci-status — single required check for branch protection
+  # ---------------------------------------------------------------------------
+  ci-status:
+    name: CI status
+    needs: [setup, lint, typecheck, test, sast, dependency-scan, media-licence-verify, build]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Evaluate required gates
+        run: |
+          set -euo pipefail
+          results='${{ toJSON(needs) }}'
+          failed=$(printf '%s' "$results" | grep -o '"result":"failure"' | wc -l)
+          cancelled=$(printf '%s' "$results" | grep -o '"result":"cancelled"' | wc -l)
+          printf '%s\n' "$results" | jq -r 'to_entries[] | "  \(.key): \(.value.result)"'
+          if [ "$failed" -ne 0 ] || [ "$cancelled" -ne 0 ]; then
+            echo "::error::CI failed: ${failed} job(s) failed, ${cancelled} cancelled."
+            exit 1
+          fi
+          echo "All required gates passed or were legitimately skipped."

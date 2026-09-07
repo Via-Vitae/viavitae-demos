@@ -1,0 +1,14 @@
+{
+  "template": "basilica",
+  "seed": 42,
+  "organisation": {
+    "nameLt": "Šv. Vito bazilika (demo)",
+    "nameEn": "Basilica of St. Vitus (demo)",
+    "nameRu": "Базилика св. Вита (демо)"
+  },
+  "staff": [
+    { "name": "Kun. Jonas Kazlauskas (demo)", "role": "rector" },
+    { "name": "Kun. Petras Petrauskas (demo)", "role": "canon" },
+    { "name": "Dn. Antanas Jankauskas (demo)", "role": "sacristan" }
+  ]
+}

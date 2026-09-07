@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://viavitae.com/schemas/tenant.json",
+  "title": "Tenant Configuration",
+  "description": "Schema for tenant.yaml — validates demo tenant provisioning input.",
+  "type": "object",
+  "required": ["slug", "template", "tier", "locale"],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{2,30}$",
+      "description": "Unique tenant slug (used in URL: demo.viavitae.com/<slug>)"
+    },
+    "template": {
+      "type": "string",
+      "enum": [
+        "basilica", "cathedral", "diocese", "deaneries",
+        "parish-church", "funeral-services", "cemetery-services",
+        "online-store", "vendor-dashboard"
+      ],
+      "description": "Template to instantiate"
+    },
+    "tier": {
+      "type": "string",
+      "enum": ["economy", "normal", "vip"],
+      "description": "Tier determines feature set and page count"
+    },
+    "locale": {
+      "type": "string",
+      "enum": ["lt", "en", "ru"],
+      "default": "lt",
+      "description": "Primary locale (LT/EN/RU)"
+    },
+    "organisationName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Fictional organisation name (must pass content-policy.md §1)"
+    },
+    "stripeMode": {
+      "type": "string",
+      "const": "test",
+      "default": "test",
+      "description": "Stripe mode — MUST be 'test' (live keys are never permitted)"
+    },
+    "seedVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Seed data version (must match config/templates.registry.ts)"
+    },
+    "dnsRecord": {
+      "type": "object",
+      "properties": {
+        "subdomain": { "type": "string" },
+        "ttl": { "type": "integer", "default": 300 }
+      },
+      "description": "DNS record configuration (managed via infra API)"
+    }
+  },
+  "additionalProperties": false
+}

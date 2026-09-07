@@ -1,0 +1,98 @@
+# CODEOWNERS — viavitae-demos
+#
+# Each line is a path pattern followed by one or more owners. Later patterns take
+# precedence over earlier ones, so the most specific rule wins. Owners are requested
+# for review automatically when a matching path changes in a pull request.
+#
+# Syntax reference: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# ---------------------------------------------------------------------------
+# RULE R2 — CODEOWNERS IMMUTABILITY
+#
+# 1. This file is NEVER empty. An empty CODEOWNERS silently removes every
+#    required reviewer, so a pull request that empties it fails review by
+#    definition. The `*` rule below must always resolve to at least
+#    @JourneyOfLife and @IterVitae.
+# 2. Overrides are allowed. Narrower path rules may add or replace owners for
+#    their subtree — that is the intended mechanism for giving security,
+#    compliance, legal and the DPO authority over their own paths.
+# 3. Removal requires compliance team approval. Deleting an owner, widening `*`,
+#    or changing the rules for /LICENSE, /SECURITY.md, /QODER.md,
+#    /.github/CODEOWNERS, /docs/DPIA-template.md or /.github/workflows/
+#    requires an approving review from the compliance reviewer in addition to
+#    the standard review. Record the reason as an ADR.
+# ---------------------------------------------------------------------------
+
+# --- Default owner for everything -------------------------------------------
+*                                       @JourneyOfLife @IterVitae
+
+# --- Platform: CI/CD, automation and repository configuration -----------------
+/.github/                               @JourneyOfLife @IterVitae
+/.github/workflows/                     @JourneyOfLife @IterVitae
+/.github/CODEOWNERS                     @JourneyOfLife @IterVitae
+/.github/dependabot.yml                 @JourneyOfLife @IterVitae
+/.editorconfig                          @JourneyOfLife @IterVitae
+/.gitignore                             @JourneyOfLife @IterVitae
+
+# --- Compliance and privacy --------------------------------------------------
+/docs/DPIA-template.md                  @JourneyOfLife @IterVitae
+/docs/architecture.md                   @JourneyOfLife @IterVitae
+
+# --- Legal and policy --------------------------------------------------------
+/LICENSE                                @JourneyOfLife @IterVitae
+/SECURITY.md                            @JourneyOfLife @IterVitae
+/CONTRIBUTING.md                        @JourneyOfLife @IterVitae
+/QODER.md                               @JourneyOfLife @IterVitae
+/CHANGELOG.md                           @JourneyOfLife @IterVitae
+/README.md                              @JourneyOfLife @IterVitae
+
+# --- Security-sensitive application paths ------------------------------------
+**/auth/**                              @JourneyOfLife @IterVitae
+**/authentication/**                    @JourneyOfLife @IterVitae
+**/authorization/**                     @JourneyOfLife @IterVitae
+**/secrets/**                           @JourneyOfLife @IterVitae
+**/crypto/**                            @JourneyOfLife @IterVitae
+**/payments/**                          @JourneyOfLife @IterVitae
+**/donations/**                         @JourneyOfLife @IterVitae
+**/checkout/**                          @JourneyOfLife @IterVitae
+**/shop/**                              @JourneyOfLife @IterVitae
+
+# --- Demo-specific: reset and seed integrity ---------------------------------
+/reset/                                 @JourneyOfLife @IterVitae
+**/reset.manifest.json                  @JourneyOfLife @IterVitae
+**/seed/**                              @JourneyOfLife @IterVitae
+shared/seed/media-manifest.json         @JourneyOfLife @IterVitae
+
+# --- Provisioning and infrastructure -----------------------------------------
+/provisioning/                          @JourneyOfLife @IterVitae
+Dockerfile                              @JourneyOfLife @IterVitae
+docker-compose*.yml                     @JourneyOfLife @IterVitae
+
+# --- Configuration -----------------------------------------------------------
+/config/                                @JourneyOfLife @IterVitae
+turbo.json                              @JourneyOfLife @IterVitae
+tsconfig.base.json                      @JourneyOfLife @IterVitae
+package.json                            @JourneyOfLife @IterVitae
+pnpm-workspace.yaml                     @JourneyOfLife @IterVitae
+
+# --- Application source ------------------------------------------------------
+*.ts                                    @JourneyOfLife @IterVitae
+*.tsx                                   @JourneyOfLife @IterVitae
+*.js                                    @JourneyOfLife @IterVitae
+*.jsx                                   @JourneyOfLife @IterVitae
+
+# --- Dependencies and packaging ----------------------------------------------
+/requirements*.txt                      @JourneyOfLife @IterVitae
+/pyproject.toml                         @JourneyOfLife @IterVitae
+
+# --- Accessibility and internationalisation ----------------------------------
+**/locales/**                           @JourneyOfLife @IterVitae
+**/i18n/**                              @JourneyOfLife @IterVitae
+**/a11y/**                              @JourneyOfLife @IterVitae
+**/components/**                        @JourneyOfLife @IterVitae
+
+# --- Tests and quality assets ------------------------------------------------
+**/*.test.*                             @JourneyOfLife @IterVitae
+**/*.spec.*                             @JourneyOfLife @IterVitae
+playwright.config.ts                    @JourneyOfLife @IterVitae
+lighthouserc.json                       @JourneyOfLife @IterVitae

@@ -1,0 +1,9 @@
+slug: vendor-dashboard
+displayName: "Vendor Dashboard"
+tiers:
+  - normal
+demoUrl: "/vendor-dashboard"
+seedVersion: "1.0.0"
+isDefault: false
+category: "vertical"
+description: "jolarca marketplace vendor side — products, orders, payouts, KYC."

@@ -1,0 +1,9 @@
+slug: online-store
+displayName: "Online Store"
+tiers:
+  - normal
+demoUrl: "/online-store"
+seedVersion: "1.0.0"
+isDefault: false
+category: "vertical"
+description: "€1,900 flat package — Stripe test-mode checkout, product catalogue."

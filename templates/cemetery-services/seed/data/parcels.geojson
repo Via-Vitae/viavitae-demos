@@ -1,0 +1,10 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "id": "plot-001", "status": "occupied", "nameLt": "Kazlauskų kapas (demo)" },
+      "geometry": { "type": "Polygon", "coordinates": [[[25.2799, 54.6710], [25.2801, 54.6710], [25.2801, 54.6712], [25.2799, 54.6712], [25.2799, 54.6710]]] }
+    }
+  ]
+}

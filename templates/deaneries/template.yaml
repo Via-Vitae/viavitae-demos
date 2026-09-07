@@ -1,0 +1,10 @@
+slug: deaneries
+displayName: "Deaneries"
+tiers:
+  - economy
+  - normal
+demoUrl: "/deaneries"
+seedVersion: "1.0.0"
+isDefault: false
+category: "tier"
+description: "Deanery demo — economy ~10 pages, dean info, parish list."

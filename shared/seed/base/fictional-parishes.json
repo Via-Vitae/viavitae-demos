@@ -1,0 +1,32 @@
+{
+  "$schema": "Shared fictional parish dataset for all demos",
+  "parishes": [
+    {
+      "id": "parish-001",
+      "nameLt": "Šv. Kazimiero parapija (demo)",
+      "nameEn": "Parish of St. Casimir (demo)",
+      "nameRu": "Приход св. Казимира (демо)",
+      "address": "Vilniaus g. 15, Vilnius",
+      "deanery": "Vilnius I",
+      "diocese": "Vilnius"
+    },
+    {
+      "id": "parish-002",
+      "nameLt": "Šv. Onos parapija (demo)",
+      "nameEn": "Parish of St. Anne (demo)",
+      "nameRu": "Приход св. Анны (демо)",
+      "address": "Kauno g. 22, Kaunas",
+      "deanery": "Kaunas I",
+      "diocese": "Kaunas"
+    },
+    {
+      "id": "parish-003",
+      "nameLt": "Šv. Jono parapija (demo)",
+      "nameEn": "Parish of St. John (demo)",
+      "nameRu": "Приход св. Иоанна (демо)",
+      "address": "Žalgirio g. 8, Šiauliai",
+      "deanery": "Šiauliai I",
+      "diocese": "Šiauliai"
+    }
+  ]
+}

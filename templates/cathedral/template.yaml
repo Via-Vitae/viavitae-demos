@@ -1,0 +1,9 @@
+slug: cathedral
+displayName: "Cathedral"
+tiers:
+  - normal
+demoUrl: "/cathedral"
+seedVersion: "1.0.0"
+isDefault: true
+category: "tier"
+description: "Normal tier default — ~15 pages with gallery, news, events."

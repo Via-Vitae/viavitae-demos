@@ -1,0 +1,9 @@
+slug: basilica
+displayName: "Basilica"
+tiers:
+  - vip
+demoUrl: "/basilica"
+seedVersion: "1.0.0"
+isDefault: true
+category: "tier"
+description: "VIP flagship demo — full page tree, shop, CRM, AI pastoral."

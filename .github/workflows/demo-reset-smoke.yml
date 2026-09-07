@@ -1,0 +1,164 @@
+name: Demo reset smoke test
+
+# Nightly smoke test: reset a staging demo to known-good seed data, then verify
+# it loads correctly with Playwright. This catches seed corruption, broken reset
+# scripts, and Stripe key leaks before customers see them.
+#
+# Runs nightly at 04:00 UTC (after the 03:00 reset CronJob completes) and on
+# demand via workflow_dispatch.
+
+on:
+  schedule:
+    # 04:00 UTC daily — one hour after the K8s CronJob reset at 03:00 UTC
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+    inputs:
+      template:
+        description: "Template to smoke-test (leave empty for all)"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "reset-smoke-${{ github.workflow }}"
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "22"
+  PNPM_VERSION: "9"
+  BASE_URL: "https://demo.viavitae.com"
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Verify seed hash integrity before Playwright connects
+  # ---------------------------------------------------------------------------
+  seed-verify:
+    name: Verify seed hashes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile || pnpm install
+
+      - name: Verify seed digests
+        run: |
+          set -euo pipefail
+          pnpm verify:seed-hashes || {
+            echo "::error::Seed hash verification failed. Reset manifest digests do not match seed data."
+            exit 1
+          }
+
+      - name: Assert no live Stripe keys in seed data
+        run: |
+          set -euo pipefail
+          # Scan all seed/ directories for anything that looks like a live Stripe key
+          if grep -rn --include='*.json' --include='*.ts' --include='*.yaml' \
+            -E 'sk_live_[0-9a-zA-Z]{24,}|pk_live_[0-9a-zA-Z]{24,}' \
+            templates/*/seed/ shared/seed/ 2>/dev/null; then
+            echo "::error::Live Stripe key(s) found in seed data. This is a security incident — rotate immediately."
+            exit 1
+          fi
+          echo "No live Stripe keys found in seed data."
+
+  # ---------------------------------------------------------------------------
+  # Playwright smoke test against staging demos
+  # ---------------------------------------------------------------------------
+  smoke:
+    name: Smoke test (${{ matrix.template }})
+    needs: seed-verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        template:
+          - basilica
+          - cathedral
+          - diocese
+          - deaneries
+          - parish-church
+          - funeral-services
+          - cemetery-services
+          - online-store
+          - vendor-dashboard
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile || pnpm install
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run smoke test
+        env:
+          BASE_URL: "${{ env.BASE_URL }}/${{ matrix.template }}"
+        run: |
+          set -euo pipefail
+          pnpm exec playwright test --project="${{ matrix.template }}" \
+            --grep="@smoke" || {
+              echo "::error::Smoke test failed for ${{ matrix.template }}. The demo at ${BASE_URL} may be broken."
+              exit 1
+            }
+
+      - name: Upload test results on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-results-${{ matrix.template }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  # ---------------------------------------------------------------------------
+  # Status
+  # ---------------------------------------------------------------------------
+  smoke-status:
+    name: Reset smoke status
+    needs: [seed-verify, smoke]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Evaluate smoke test results
+        run: |
+          set -uo pipefail
+          results='${{ toJSON(needs) }}'
+          printf '%s\n' "$results" | jq -r 'to_entries[] | "  \(.key): \(.value.result)"'
+          failed=$(printf '%s\n' "$results" | jq '[to_entries[] | select(.value.result == "failure")] | length')
+          if [ "$failed" -ne 0 ]; then
+            echo "::error::${failed} smoke test(s) failed. Check docs/reset-runbook.md for escalation."
+            exit 1
+          fi
+          echo "All smoke tests passed."

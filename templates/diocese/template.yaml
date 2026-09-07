@@ -1,0 +1,10 @@
+slug: diocese
+displayName: "Diocese"
+tiers:
+  - normal
+  - vip
+demoUrl: "/diocese"
+seedVersion: "1.0.0"
+isDefault: false
+category: "tier"
+description: "Diocese-wide demo — curia structure, parish directory, documents."

@@ -1,0 +1,110 @@
+name: "Bug report"
+description: "Report a defect in a demo template, the reset mechanism, or shared infrastructure"
+title: "fix(<scope>): <summary>"
+labels: ["type: bug"]
+projects: ["Via-Vitae/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug. Before submitting, confirm the issue
+        is not caused by the nightly reset (check `docs/reset-runbook.md`).
+        If this is a **security vulnerability**, do NOT use this form —
+        email `security@viavitae.com` instead (see SECURITY.md).
+
+  - type: input
+    id: affected-demo
+    attributes:
+      label: Affected demo template
+      description: Which demo is affected? (e.g. basilica, cathedral, online-store)
+      placeholder: "basilica"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Critical — demo is completely broken or inaccessible
+        - High — major feature broken, no workaround
+        - Medium — feature broken but workaround exists
+        - Low — cosmetic or minor inconvenience
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-layer
+    attributes:
+      label: Affected layer
+      options:
+        - Template pages (app/)
+        - Shared components (shared/design-system/)
+        - Shared library (shared/lib/)
+        - Seed data (shared/seed/ or templates/*/seed/)
+        - Reset mechanism (reset/)
+        - Provisioning (provisioning/)
+        - CI/CD workflows (.github/workflows/)
+        - Configuration (config/)
+        - Documentation (docs/)
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Where did you see the bug? (demo URL, local dev, CI)
+      placeholder: "https://demo.viavitae.com/basilica"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps that reproduce the issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: |
+        Paste console errors, network responses or screenshots.
+        **Do not paste personal data, credentials or real names.**
+        Redact anything sensitive before submitting.
+      render: shell
+
+  - type: dropdown
+    id: gdpr-relevant
+    attributes:
+      label: Does this bug involve personal data or GDPR-relevant processing?
+      options:
+        - "No"
+        - "Yes — describe in the body above"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        **Sensitive data warning:** Do not include real names, email addresses,
+        phone numbers, payment details or any other personal data in this form.
+        Demo data is fictional; if you have somehow entered real data into a
+        demo, it will be wiped on the next nightly reset.

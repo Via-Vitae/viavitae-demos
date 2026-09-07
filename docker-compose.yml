@@ -1,0 +1,81 @@
+# Local development: all 9 demos + api-mock + tileserver-mock
+version: "3.9"
+
+services:
+  # ── Demo templates ──────────────────────────────────────────────────
+  basilica:
+    build: { context: ., args: { TEMPLATE: basilica } }
+    ports: ["3001:3000"]
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api-mock:8000
+      - DEMO_TEMPLATE=basilica
+
+  cathedral:
+    build: { context: ., args: { TEMPLATE: cathedral } }
+    ports: ["3002:3000"]
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api-mock:8000
+      - DEMO_TEMPLATE=cathedral
+
+  diocese:
+    build: { context: ., args: { TEMPLATE: diocese } }
+    ports: ["3003:3000"]
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api-mock:8000
+      - DEMO_TEMPLATE=diocese
+
+  deaneries:
+    build: { context: ., args: { TEMPLATE: deaneries } }
+    ports: ["3004:3000"]
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api-mock:8000
+      - DEMO_TEMPLATE=deaneries
+
+  parish-church:
+    build: { context: ., args: { TEMPLATE: parish-church } }
+    ports: ["3005:3000"]
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api-mock:8000
+      - DEMO_TEMPLATE=parish-church
+
+  funeral-services:
+    build: { context: ., args: { TEMPLATE: funeral-services } }
+    ports: ["3006:3000"]
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api-mock:8000
+      - DEMO_TEMPLATE=funeral-services
+
+  cemetery-services:
+    build: { context: ., args: { TEMPLATE: cemetery-services } }
+    ports: ["3007:3000"]
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api-mock:8000
+      - DEMO_TEMPLATE=cemetery-services
+      - NEXT_PUBLIC_TILESERVER_URL=http://tileserver-mock:8080
+
+  online-store:
+    build: { context: ., args: { TEMPLATE: online-store } }
+    ports: ["3008:3000"]
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api-mock:8000
+      - DEMO_TEMPLATE=online-store
+
+  vendor-dashboard:
+    build: { context: ., args: { TEMPLATE: vendor-dashboard } }
+    ports: ["3009:3000"]
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api-mock:8000
+      - DEMO_TEMPLATE=vendor-dashboard
+
+  # ── Supporting services ─────────────────────────────────────────────
+  api-mock:
+    image: wiremock/wiremock:3.9.0
+    ports: ["8000:8080"]
+    volumes:
+      - ./docker/api-mock:/home/wiremock
+
+  tileserver-mock:
+    image: klokantech/tileserver-gl:latest
+    ports: ["8080:8080"]
+    volumes:
+      - ./docker/tiles:/data

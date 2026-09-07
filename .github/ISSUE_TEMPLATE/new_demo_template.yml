@@ -1,0 +1,121 @@
+name: "New demo template"
+description: "Propose a new vertical demo template for the ViaVitae demo fleet"
+title: "feat(demos): new template — <vertical name>"
+labels: ["type: enhancement", "scope: new-template"]
+projects: ["Via-Vitae/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form proposes a **new vertical demo template** for the ViaVitae
+        demo fleet. Each template is a standalone Next.js application that
+        shares the common design system, seed data layer, and reset mechanism.
+
+        Before submitting, confirm the vertical is not already covered by an
+        existing template (see the template list in README.md).
+
+  - type: input
+    id: template-name
+    attributes:
+      label: Template name (slug)
+      description: Lowercase, hyphen-separated. This becomes the URL path and package name.
+      placeholder: "music-school"
+    validations:
+      required: true
+
+  - type: textarea
+    id: vertical-description
+    attributes:
+      label: Vertical description
+      description: What type of organisation is this demo for? What does it showcase?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Target tier
+      description: Which pricing tier does this template default to?
+      options:
+        - Economy (~10 pages, €900)
+        - Normal (~15 pages, €1,900)
+        - VIP (~20 pages + E-commerce, €2,900)
+    validations:
+      required: true
+
+  - type: textarea
+    id: page-list
+    attributes:
+      label: Proposed page list
+      description: List the pages this template would include.
+      placeholder: |
+        - homepage
+        - services/
+        - pricing/
+        - gallery/
+        - contact/
+        - legal/
+    validations:
+      required: true
+
+  - type: dropdown
+    id: personal-data
+    attributes:
+      label: Does this demo process personal data?
+      description: |
+        Examples: booking forms that collect names, CRM dashboards,
+        contact forms, sacrament registration, obituary submissions.
+        If yes, a DPIA is required before the demo can launch.
+      options:
+        - No — all content is static or purely fictional display
+        - Yes — forms or data collection are involved
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: third-party-services
+    attributes:
+      label: Does this demo integrate third-party services?
+      description: |
+        Examples: Stripe payments, MapLibre tiles, Bitrix24 CRM,
+        Cal.com booking, LLM APIs, analytics.
+        Each third-party service needs a data residency check (EEA-only).
+      options:
+        - No third-party services
+        - Yes — list them in the description below
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: third-party-details
+    attributes:
+      label: Third-party service details
+      description: If yes above, list each service, its data residency, and whether a DPA is needed.
+
+  - type: dropdown
+    id: media-needs
+    attributes:
+      label: Media requirements
+      description: Does this template need real imagery or can it use placeholder graphics?
+      options:
+        - No imagery needed (text/graphics only)
+        - CC0 or own photography available
+        - Imagery needed but not yet sourced
+    validations:
+      required: true
+
+  - type: textarea
+    id: sales-rationale
+    attributes:
+      label: Sales rationale
+      description: Why would this vertical drive conversions? What customer segment does it target?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What must be true for this template to be considered ready for launch?

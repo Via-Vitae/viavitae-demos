@@ -1,0 +1,30 @@
+{
+  "$schema": "Image licence registry — every file in seed/media/ must have an entry here",
+  "version": "1.0.0",
+  "images": [
+    {
+      "path": "hero-altar.jpg",
+      "licence": "CC0-1.0",
+      "source": "own photography",
+      "altLt": "Bažnyčios altorius su žvakėmis",
+      "altEn": "Church altar with candles",
+      "altRu": "Церковный алтарь со свечами"
+    },
+    {
+      "path": "facade.jpg",
+      "licence": "CC0-1.0",
+      "source": "own photography",
+      "altLt": "Bažnyčios fasadas iš priekio",
+      "altEn": "Church facade from the front",
+      "altRu": "Фасад церкви спереди"
+    },
+    {
+      "path": "stained-glass.jpg",
+      "licence": "CC0-1.0",
+      "source": "own photography",
+      "altLt": "Vitražas su šv. Kazimiero vaizdu",
+      "altEn": "Stained glass window depicting St. Casimir",
+      "altRu": "Витраж с изображением св. Казимира"
+    }
+  ]
+}

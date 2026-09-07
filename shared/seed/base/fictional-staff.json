@@ -1,0 +1,26 @@
+{
+  "$schema": "Shared fictional staff dataset — all names generated with fixed Faker seed",
+  "staff": [
+    {
+      "id": "staff-001",
+      "name": "Kun. Jonas Kazlauskas (demo)",
+      "role": "parish-priest",
+      "parishId": "parish-001",
+      "email": "jonas.kazlauskas@demo.viavitae.com"
+    },
+    {
+      "id": "staff-002",
+      "name": "Kun. Petras Petrauskas (demo)",
+      "role": "associate-priest",
+      "parishId": "parish-001",
+      "email": "petras.petrauskas@demo.viavitae.com"
+    },
+    {
+      "id": "staff-003",
+      "name": "Dn. Antanas Jankauskas (demo)",
+      "role": "deacon",
+      "parishId": "parish-002",
+      "email": "antanas.jankauskas@demo.viavitae.com"
+    }
+  ]
+}

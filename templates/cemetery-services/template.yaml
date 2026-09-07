@@ -1,0 +1,9 @@
+slug: cemetery-services
+displayName: "Cemetery Services"
+tiers:
+  - normal
+demoUrl: "/cemetery-services"
+seedVersion: "1.0.0"
+isDefault: false
+category: "vertical"
+description: "Cemetery landing + GIS showcase — GPS map, plots, burial records."

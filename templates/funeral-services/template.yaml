@@ -1,0 +1,10 @@
+slug: funeral-services
+displayName: "Funeral Services"
+tiers:
+  - economy
+  - normal
+demoUrl: "/funeral-services"
+seedVersion: "1.0.0"
+isDefault: false
+category: "vertical"
+description: "Funeral home vertical — services, pricing, obituary, chapel."
