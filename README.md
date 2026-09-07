@@ -151,10 +151,10 @@ Every pull request must pass:
 | Lint | ESLint | zero warnings |
 | Format | Prettier | no diff |
 | Types | `tsc --noEmit` | zero errors |
-| Unit tests | Vitest | pass, coverage ≥ 80% |
-| E2E | Playwright | pass per template |
-| Performance | Lighthouse CI | LCP < 1.8s, CLS < 0.1, TBT < 200ms |
-| Accessibility | axe | zero WCAG 2.2 AA violations |
+| Unit tests | Vitest | pass (coverage reported, threshold TBD) |
+| E2E | Playwright | nightly (demo-reset-smoke.yml) |
+| Performance | Lighthouse CI | nightly — budgets in config/budgets.json |
+| Accessibility | axe | nightly — zero WCAG 2.2 AA target |
 | SAST | Semgrep, CodeQL | zero findings at failure severity |
 | Dependencies | Trivy filesystem | fail on CRITICAL |
 | Secrets | TruffleHog `--only-verified` | fail on any finding |
