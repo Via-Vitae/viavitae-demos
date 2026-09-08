@@ -31,14 +31,15 @@ export function LiturgicalCalendar({ events }: { events: CalendarEvent[] }) {
       <h2 className="mb-4 text-xl font-semibold">Liturgical Calendar</h2>
       <ul className="space-y-2">
         {events.map((event) => (
-          <li key={event.date} className="flex items-center justify-between border-b py-2 last:border-0">
+          <li
+            key={event.date}
+            className="flex items-center justify-between border-b py-2 last:border-0"
+          >
             <div>
               <span className="text-sm text-muted-foreground">{event.date}</span>
               <span className="ml-3 font-medium">{event.name}</span>
             </div>
-            <Badge className={colorMap[event.liturgicalColor] ?? ""}>
-              {event.liturgicalColor}
-            </Badge>
+            <Badge className={colorMap[event.liturgicalColor] ?? ""}>{event.liturgicalColor}</Badge>
           </li>
         ))}
       </ul>

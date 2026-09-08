@@ -34,25 +34,25 @@ alt-text (LT/EN/RU).
 
 ## Templates
 
-| # | Template | Tier | Pages | Demo URL |
-|---|----------|------|-------|----------|
-| 1 | `basilica` | VIP flagship | ~20 | `demo.viavitae.com/basilica` |
-| 2 | `cathedral` | Normal default | ~15 | `demo.viavitae.com/cathedral` |
-| 3 | `diocese` | Diocese-wide | ~15 | `demo.viavitae.com/diocese` |
-| 4 | `deaneries` | Economy | ~10 | `demo.viavitae.com/deaneries` |
-| 5 | `parish-church` | Economy default | ~10 | `demo.viavitae.com/parish-church` |
-| 6 | `funeral-services` | Vertical | ~12 | `demo.viavitae.com/funeral-services` |
-| 7 | `cemetery-services` | Vertical + GIS | ~10 | `demo.viavitae.com/cemetery-services` |
-| 8 | `online-store` | E-commerce | ~10 | `demo.viavitae.com/online-store` |
-| 9 | `vendor-dashboard` | Marketplace | ~8 | `demo.viavitae.com/vendor-dashboard` |
+| #   | Template            | Tier            | Pages | Demo URL                              |
+| --- | ------------------- | --------------- | ----- | ------------------------------------- |
+| 1   | `basilica`          | VIP flagship    | ~20   | `demo.viavitae.com/basilica`          |
+| 2   | `cathedral`         | Normal default  | ~15   | `demo.viavitae.com/cathedral`         |
+| 3   | `diocese`           | Diocese-wide    | ~15   | `demo.viavitae.com/diocese`           |
+| 4   | `deaneries`         | Economy         | ~10   | `demo.viavitae.com/deaneries`         |
+| 5   | `parish-church`     | Economy default | ~10   | `demo.viavitae.com/parish-church`     |
+| 6   | `funeral-services`  | Vertical        | ~12   | `demo.viavitae.com/funeral-services`  |
+| 7   | `cemetery-services` | Vertical + GIS  | ~10   | `demo.viavitae.com/cemetery-services` |
+| 8   | `online-store`      | E-commerce      | ~10   | `demo.viavitae.com/online-store`      |
+| 9   | `vendor-dashboard`  | Marketplace     | ~8    | `demo.viavitae.com/vendor-dashboard`  |
 
 ## Tier system
 
-| Tier | Pages | Price | Default template | Includes |
-|------|-------|-------|------------------|----------|
-| Economy | ~10 | €900 | `parish-church` | Core pages, donation flow |
-| Normal | ~15 | €1,900 | `cathedral` | Economy + gallery, news, events |
-| VIP | ~20 + E-commerce | €2,900 | `basilica` | Normal + shop, CRM dashboard, AI pastoral |
+| Tier    | Pages            | Price  | Default template | Includes                                  |
+| ------- | ---------------- | ------ | ---------------- | ----------------------------------------- |
+| Economy | ~10              | €900   | `parish-church`  | Core pages, donation flow                 |
+| Normal  | ~15              | €1,900 | `cathedral`      | Economy + gallery, news, events           |
+| VIP     | ~20 + E-commerce | €2,900 | `basilica`       | Normal + shop, CRM dashboard, AI pastoral |
 
 Runtime source of truth: `config/tiers.config.ts`. Human-readable reference:
 `docs/tiers.md`. Tier upgrade teasers are baked into Economy and Normal templates.
@@ -146,21 +146,21 @@ See [docs/reset-runbook.md](docs/reset-runbook.md) for failure escalation.
 
 Every pull request must pass:
 
-| Gate | Tool | Threshold |
-|------|------|-----------|
-| Lint | ESLint | zero warnings |
-| Format | Prettier | no diff |
-| Types | `tsc --noEmit` | zero errors |
-| Unit tests | Vitest | pass (coverage reported, threshold TBD) |
-| E2E | Playwright | nightly (demo-reset-smoke.yml) |
-| Performance | Lighthouse CI | nightly — budgets in config/budgets.json |
-| Accessibility | axe | nightly — zero WCAG 2.2 AA target |
-| SAST | Semgrep, CodeQL | zero findings at failure severity |
-| Dependencies | Trivy filesystem | fail on CRITICAL |
-| Secrets | TruffleHog `--only-verified` | fail on any finding |
-| Licences | allow-list scan | unknown licence fails |
-| Media licences | manifest verification | every image has a licence |
-| Governance | presence checks | CODEOWNERS, .editorconfig, .gitignore |
+| Gate           | Tool                         | Threshold                                |
+| -------------- | ---------------------------- | ---------------------------------------- |
+| Lint           | ESLint                       | zero warnings                            |
+| Format         | Prettier                     | no diff                                  |
+| Types          | `tsc --noEmit`               | zero errors                              |
+| Unit tests     | Vitest                       | pass (coverage reported, threshold TBD)  |
+| E2E            | Playwright                   | nightly (demo-reset-smoke.yml)           |
+| Performance    | Lighthouse CI                | nightly — budgets in config/budgets.json |
+| Accessibility  | axe                          | nightly — zero WCAG 2.2 AA target        |
+| SAST           | Semgrep, CodeQL              | zero findings at failure severity        |
+| Dependencies   | Trivy filesystem             | fail on CRITICAL                         |
+| Secrets        | TruffleHog `--only-verified` | fail on any finding                      |
+| Licences       | allow-list scan              | unknown licence fails                    |
+| Media licences | manifest verification        | every image has a licence                |
+| Governance     | presence checks              | CODEOWNERS, .editorconfig, .gitignore    |
 
 ## Security and compliance
 
@@ -177,25 +177,25 @@ Every pull request must pass:
 
 ## Documentation
 
-| Document | Purpose |
-|----------|---------|
-| [SECURITY.md](SECURITY.md) | Disclosure policy, SLA, safe harbour, scope |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Workflow, PR rules, DCO sign-off |
-| [CHANGELOG.md](CHANGELOG.md) | Release history, Keep a Changelog format |
-| [QODER.md](QODER.md) | AI pair-programming guardrails |
-| [docs/architecture.md](docs/architecture.md) | MADR decision records |
-| [docs/DPIA-template.md](docs/DPIA-template.md) | GDPR Article 35 assessments |
-| [docs/content-policy.md](docs/content-policy.md) | Fictional entities, imagery rules |
-| [docs/tiers.md](docs/tiers.md) | Tier pricing reference |
-| [docs/reset-runbook.md](docs/reset-runbook.md) | Reset mechanics, escalation |
+| Document                                         | Purpose                                     |
+| ------------------------------------------------ | ------------------------------------------- |
+| [SECURITY.md](SECURITY.md)                       | Disclosure policy, SLA, safe harbour, scope |
+| [CONTRIBUTING.md](CONTRIBUTING.md)               | Workflow, PR rules, DCO sign-off            |
+| [CHANGELOG.md](CHANGELOG.md)                     | Release history, Keep a Changelog format    |
+| [QODER.md](QODER.md)                             | AI pair-programming guardrails              |
+| [docs/architecture.md](docs/architecture.md)     | MADR decision records                       |
+| [docs/DPIA-template.md](docs/DPIA-template.md)   | GDPR Article 35 assessments                 |
+| [docs/content-policy.md](docs/content-policy.md) | Fictional entities, imagery rules           |
+| [docs/tiers.md](docs/tiers.md)                   | Tier pricing reference                      |
+| [docs/reset-runbook.md](docs/reset-runbook.md)   | Reset mechanics, escalation                 |
 
 ## Cross-repo gates
 
-| Dependency | Status | Notes |
-|-----------|--------|-------|
-| `@via-vitae/brand` | Required | Must be published to GitHub Packages first |
-| `viavitae-api` | CI mock | `docker-compose.yml` provides `api-mock` service |
-| `viavitae-infra` | K8s CronJob | Reset CronJob spec lives in `viavitae-infra/k8s/` |
+| Dependency         | Status      | Notes                                             |
+| ------------------ | ----------- | ------------------------------------------------- |
+| `@via-vitae/brand` | Required    | Must be published to GitHub Packages first        |
+| `viavitae-api`     | CI mock     | `docker-compose.yml` provides `api-mock` service  |
+| `viavitae-infra`   | K8s CronJob | Reset CronJob spec lives in `viavitae-infra/k8s/` |
 
 ## Licence
 

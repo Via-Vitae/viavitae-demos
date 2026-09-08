@@ -43,8 +43,8 @@ See `docs/reset-runbook.md` for detailed escalation procedures.
 
 ## Files
 
-| File | Purpose |
-|------|---------|
-| `reset.sh` | Main reset script — idempotent, safe to re-run |
+| File           | Purpose                                              |
+| -------------- | ---------------------------------------------------- |
+| `reset.sh`     | Main reset script — idempotent, safe to re-run       |
 | `seed-hash.ts` | SHA-256 digest computation and manifest verification |
-| `README.md` | This file |
+| `README.md`    | This file                                            |

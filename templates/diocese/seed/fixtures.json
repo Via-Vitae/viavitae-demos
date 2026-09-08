@@ -1,1 +1,9 @@
-{ "template": "diocese", "seed": 256, "organisation": { "nameLt": "Vilniaus vyskupija (demo)", "nameEn": "Diocese of Vilnius (demo)", "nameRu": "Виленская епархия (демо)" } }
+{
+  "template": "diocese",
+  "seed": 256,
+  "organisation": {
+    "nameLt": "Vilniaus vyskupija (demo)",
+    "nameEn": "Diocese of Vilnius (demo)",
+    "nameRu": "Виленская епархия (демо)"
+  }
+}

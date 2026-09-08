@@ -14,9 +14,15 @@
     "template": {
       "type": "string",
       "enum": [
-        "basilica", "cathedral", "diocese", "deaneries",
-        "parish-church", "funeral-services", "cemetery-services",
-        "online-store", "vendor-dashboard"
+        "basilica",
+        "cathedral",
+        "diocese",
+        "deaneries",
+        "parish-church",
+        "funeral-services",
+        "cemetery-services",
+        "online-store",
+        "vendor-dashboard"
       ],
       "description": "Template to instantiate"
     },

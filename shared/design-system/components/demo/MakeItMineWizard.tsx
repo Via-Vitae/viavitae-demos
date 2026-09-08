@@ -16,13 +16,7 @@ import { Button } from "../ui/Button";
  * 3. Tier selection
  * 4. Confirmation → redirect to Cal.com booking
  */
-export function MakeItMineWizard({
-  templateSlug,
-  tier,
-}: {
-  templateSlug: string;
-  tier: string;
-}) {
+export function MakeItMineWizard({ templateSlug, tier }: { templateSlug: string; tier: string }) {
   const [open, setOpen] = useState(false);
   const { locale } = useLocale();
 

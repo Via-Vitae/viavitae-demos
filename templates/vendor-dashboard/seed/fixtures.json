@@ -1,1 +1,9 @@
-{ "template": "vendor-dashboard", "seed": 16384, "organisation": { "nameLt": "jolarca Pardavėjas (demo)", "nameEn": "jolarca Vendor (demo)", "nameRu": "Продавец jolarca (демо)" } }
+{
+  "template": "vendor-dashboard",
+  "seed": 16384,
+  "organisation": {
+    "nameLt": "jolarca Pardavėjas (demo)",
+    "nameEn": "jolarca Vendor (demo)",
+    "nameRu": "Продавец jolarca (демо)"
+  }
+}

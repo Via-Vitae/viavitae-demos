@@ -41,15 +41,15 @@ We work trunk-based. `main` is always deployable, always protected, and always m
 Prefix every branch with its type. The prefix drives changelog grouping and reviewer
 routing.
 
-| Prefix | Use | Example |
-| --- | --- | --- |
-| `feat/` | A new feature | `feat/basilica-virtual-tour` |
-| `fix/` | A bug fix | `fix/reset-stripe-key-assertion` |
-| `chore/` | Maintenance, dependencies, tooling | `chore/pin-action-shas` |
-| `docs/` | Documentation only | `docs/dpia-003-sacrament-forms` |
-| `test/` | Tests only, no production change | `test/playwright-cemetery-gis` |
-| `ci/` | CI configuration only | `ci/turborepo-remote-cache` |
-| `refactor/` | Restructuring, no behaviour change | `refactor/shared-seed-extract` |
+| Prefix      | Use                                | Example                          |
+| ----------- | ---------------------------------- | -------------------------------- |
+| `feat/`     | A new feature                      | `feat/basilica-virtual-tour`     |
+| `fix/`      | A bug fix                          | `fix/reset-stripe-key-assertion` |
+| `chore/`    | Maintenance, dependencies, tooling | `chore/pin-action-shas`          |
+| `docs/`     | Documentation only                 | `docs/dpia-003-sacrament-forms`  |
+| `test/`     | Tests only, no production change   | `test/playwright-cemetery-gis`   |
+| `ci/`       | CI configuration only              | `ci/turborepo-remote-cache`      |
+| `refactor/` | Restructuring, no behaviour change | `refactor/shared-seed-extract`   |
 
 Keep names lowercase, hyphen-separated, and under 50 characters. Include the issue number
 where one exists: `fix/214-reset-hash-mismatch`.
@@ -70,18 +70,18 @@ release note.
 Signed-off-by: Your Name <you@viavitae.com>
 ```
 
-| Type | Meaning | Changelog section |
-| --- | --- | --- |
-| `feat` | A new feature | **Added** |
-| `fix` | A bug fix | **Fixed** |
-| `perf` | A performance improvement | **Changed** |
-| `refactor` | Restructuring, no behaviour change | **Changed** |
-| `docs` | Documentation only | **Documentation** |
-| `test` | Adding or correcting tests | not released |
-| `build` | Build system or dependencies | **Infrastructure** |
-| `ci` | CI configuration | **Infrastructure** |
-| `chore` | Other changes that touch neither source nor tests | not released |
-| `revert` | Reverting a previous commit | **Reverted** |
+| Type       | Meaning                                           | Changelog section  |
+| ---------- | ------------------------------------------------- | ------------------ |
+| `feat`     | A new feature                                     | **Added**          |
+| `fix`      | A bug fix                                         | **Fixed**          |
+| `perf`     | A performance improvement                         | **Changed**        |
+| `refactor` | Restructuring, no behaviour change                | **Changed**        |
+| `docs`     | Documentation only                                | **Documentation**  |
+| `test`     | Adding or correcting tests                        | not released       |
+| `build`    | Build system or dependencies                      | **Infrastructure** |
+| `ci`       | CI configuration                                  | **Infrastructure** |
+| `chore`    | Other changes that touch neither source nor tests | not released       |
+| `revert`   | Reverting a previous commit                       | **Reverted**       |
 
 Rules:
 
@@ -216,28 +216,28 @@ not a penalty; it changes how a reviewer reads the diff.
 
 ## Compliance items that apply to every change
 
-| Area | Requirement |
-| --- | --- |
-| **Personal data** | No new processing without a completed DPIA. See `docs/DPIA-template.md` and rule R5. |
-| **Data residency** | Storage, backups, processors and CI runners stay in the EEA. |
-| **Accessibility** | UI changes meet WCAG 2.2 AA and pass the `axe` gate. |
-| **Internationalisation** | User-facing strings are added to `lt`, `en` and `ru` in the same change. |
-| **Secrets** | Never committed, never logged, never in a fixture. Rotated immediately if exposed. |
-| **Licences** | Inbound components carry an allow-listed licence. Copyleft requires legal review. |
-| **Media licences** | Every image in `seed/media/` has a manifest entry with a valid licence. |
-| **Architecture** | A decision with security, privacy, residency or cost impact gets an ADR. |
-| **Changelog** | The entry follows from the Conventional Commit type. |
-| **Reset safety** | Changes to seed data do not introduce live API keys or personal data. |
+| Area                     | Requirement                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------ |
+| **Personal data**        | No new processing without a completed DPIA. See `docs/DPIA-template.md` and rule R5. |
+| **Data residency**       | Storage, backups, processors and CI runners stay in the EEA.                         |
+| **Accessibility**        | UI changes meet WCAG 2.2 AA and pass the `axe` gate.                                 |
+| **Internationalisation** | User-facing strings are added to `lt`, `en` and `ru` in the same change.             |
+| **Secrets**              | Never committed, never logged, never in a fixture. Rotated immediately if exposed.   |
+| **Licences**             | Inbound components carry an allow-listed licence. Copyleft requires legal review.    |
+| **Media licences**       | Every image in `seed/media/` has a manifest entry with a valid licence.              |
+| **Architecture**         | A decision with security, privacy, residency or cost impact gets an ADR.             |
+| **Changelog**            | The entry follows from the Conventional Commit type.                                 |
+| **Reset safety**         | Changes to seed data do not introduce live API keys or personal data.                |
 
 ## Getting help
 
-| Question | Where |
-| --- | --- |
-| Workflow, review, branch or commit rules | This document, then `#engineering` |
-| Architecture or design decisions | The architects, and record the outcome as an ADR |
-| Personal data, DPIA, retention, processors | `dpo@viavitae.com` |
-| Licensing and third-party components | `legal@viavitae.com` |
-| Vulnerabilities and security incidents | `security@viavitae.com` — private, per [SECURITY.md](SECURITY.md) |
+| Question                                   | Where                                                             |
+| ------------------------------------------ | ----------------------------------------------------------------- |
+| Workflow, review, branch or commit rules   | This document, then `#engineering`                                |
+| Architecture or design decisions           | The architects, and record the outcome as an ADR                  |
+| Personal data, DPIA, retention, processors | `dpo@viavitae.com`                                                |
+| Licensing and third-party components       | `legal@viavitae.com`                                              |
+| Vulnerabilities and security incidents     | `security@viavitae.com` — private, per [SECURITY.md](SECURITY.md) |
 
 ## Recognition
 

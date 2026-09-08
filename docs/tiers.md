@@ -7,11 +7,11 @@ source of truth is `config/tiers.config.ts`.
 
 ## Tier overview
 
-| Tier | Pages | Price | Default template | Key features |
-|------|-------|-------|------------------|--------------|
-| **Economy** | ~10 | €900 | `parish-church` | Core pages, donation flow, mass schedule |
-| **Normal** | ~15 | €1,900 | `cathedral` | Economy + gallery, news, events, calendar |
-| **VIP** | ~20 + E-commerce | €2,900 | `basilica` | Normal + shop, CRM dashboard, AI pastoral |
+| Tier        | Pages            | Price  | Default template | Key features                              |
+| ----------- | ---------------- | ------ | ---------------- | ----------------------------------------- |
+| **Economy** | ~10              | €900   | `parish-church`  | Core pages, donation flow, mass schedule  |
+| **Normal**  | ~15              | €1,900 | `cathedral`      | Economy + gallery, news, events, calendar |
+| **VIP**     | ~20 + E-commerce | €2,900 | `basilica`       | Normal + shop, CRM dashboard, AI pastoral |
 
 ## What changes per tier
 
@@ -54,12 +54,12 @@ Everything in Normal, plus:
 
 In addition to the tier ladder, ViaVitae offers specialised vertical demos:
 
-| Vertical | Template | Pages | Price range |
-|----------|----------|-------|-------------|
-| Funeral services | `funeral-services` | ~12 | €900–€1,900 |
-| Cemetery services | `cemetery-services` | ~10 + GIS | €1,900 |
-| Online store | `online-store` | ~10 | €1,900 (flat) |
-| Vendor dashboard | `vendor-dashboard` | ~8 | Part of jolarca |
+| Vertical          | Template            | Pages     | Price range     |
+| ----------------- | ------------------- | --------- | --------------- |
+| Funeral services  | `funeral-services`  | ~12       | €900–€1,900     |
+| Cemetery services | `cemetery-services` | ~10 + GIS | €1,900          |
+| Online store      | `online-store`      | ~10       | €1,900 (flat)   |
+| Vendor dashboard  | `vendor-dashboard`  | ~8        | Part of jolarca |
 
 ## Pricing changes
 

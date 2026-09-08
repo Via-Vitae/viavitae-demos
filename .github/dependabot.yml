@@ -7,7 +7,6 @@
 version: 2
 
 updates:
-
   # --- Node (npm/pnpm) -------------------------------------------------------
   - package-ecosystem: "npm"
     directory: "/"

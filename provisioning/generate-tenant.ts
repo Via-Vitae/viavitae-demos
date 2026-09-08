@@ -37,14 +37,14 @@ function validateConfig(config: TenantConfig): void {
   if (!template.tiers.includes(config.tier)) {
     throw new Error(
       `Template '${config.template}' is not available on tier '${config.tier}'. ` +
-      `Available tiers: ${template.tiers.join(", ")}`,
+        `Available tiers: ${template.tiers.join(", ")}`,
     );
   }
 
   if (template.seedVersion !== config.seedVersion) {
     throw new Error(
       `Seed version mismatch: tenant wants ${config.seedVersion}, ` +
-      `template provides ${template.seedVersion}`,
+        `template provides ${template.seedVersion}`,
     );
   }
 }
@@ -64,7 +64,9 @@ export async function generateTenant(configPath: string): Promise<void> {
   console.log(`[generate-tenant] Creating container with target: ${config.template}`);
 
   // Step 2: Create Postgres schema
-  console.log(`[generate-tenant] Creating Postgres schema: tenant_${config.slug.replace(/-/g, "_")}`);
+  console.log(
+    `[generate-tenant] Creating Postgres schema: tenant_${config.slug.replace(/-/g, "_")}`,
+  );
 
   // Step 3: Provision DNS
   console.log(`[generate-tenant] Provisioning DNS: demo.viavitae.com/${config.slug}`);
