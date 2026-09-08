@@ -9,7 +9,11 @@ interface Crumb {
 export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
   return (
     <nav aria-label="Breadcrumb" className="py-3">
-      <ol className="flex items-center gap-2 text-sm text-muted-foreground" itemScope itemType="https://schema.org/BreadcrumbList">
+      <ol
+        className="flex items-center gap-2 text-sm text-muted-foreground"
+        itemScope
+        itemType="https://schema.org/BreadcrumbList"
+      >
         {crumbs.map((crumb, i) => (
           <li key={i} className="flex items-center gap-2" itemProp="itemListElement" itemScope>
             {i > 0 && <span aria-hidden="true">/</span>}

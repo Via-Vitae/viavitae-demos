@@ -32,8 +32,24 @@ function mulberry32(seed: number): () => number {
   };
 }
 
-const FIRST_NAMES = ["Jonas", "Petras", "Antanas", "Ona", "Marija", "Elžbieta", "Tomas", "Kristina"];
-const LAST_NAMES = ["Kazlauskas", "Petrauskas", "Jankauskas", "Stankevičienė", "Butkienė", "Urbonaitė"];
+const FIRST_NAMES = [
+  "Jonas",
+  "Petras",
+  "Antanas",
+  "Ona",
+  "Marija",
+  "Elžbieta",
+  "Tomas",
+  "Kristina",
+];
+const LAST_NAMES = [
+  "Kazlauskas",
+  "Petrauskas",
+  "Jankauskas",
+  "Stankevičienė",
+  "Butkienė",
+  "Urbonaitė",
+];
 const PARISH_NAMES = ["Šv. Kazimiero", "Šv. Onos", "Šv. Jono", "Šv. Marijos", "Šv. Kryžiaus"];
 const STREETS = ["Vilniaus g.", "Kauno g.", "Žalgirio g.", "Gedimino pr.", "Laisvės al."];
 

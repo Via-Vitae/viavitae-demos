@@ -14,7 +14,13 @@ interface GalleryImage {
  * All images must have trilingual alt-text and a valid licence entry in
  * `shared/seed/media-manifest.json` (content-policy.md §3).
  */
-export function GalleryGrid({ images, locale }: { images: GalleryImage[]; locale: "lt" | "en" | "ru" }) {
+export function GalleryGrid({
+  images,
+  locale,
+}: {
+  images: GalleryImage[];
+  locale: "lt" | "en" | "ru";
+}) {
   const altKey = { lt: "altLt", en: "altEn", ru: "altRu" } as const;
 
   return (

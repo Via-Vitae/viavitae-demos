@@ -16,13 +16,13 @@ state. The reset ensures:
 
 ## Reset schedule
 
-| Time (UTC) | Action |
-|------------|--------|
-| 03:00 | K8s CronJob triggers `reset/reset.sh` via `viavitae-api` worker |
-| 03:05 | Reset completes; seed hashes verified against `reset.manifest.json` |
-| 03:10 | Stripe key assertion runs (no `sk_live_*` or `pk_live_*` in seed/) |
-| 04:00 | `demo-reset-smoke.yml` Playwright smoke test begins |
-| 04:15 | Smoke test results available in GitHub Actions |
+| Time (UTC) | Action                                                              |
+| ---------- | ------------------------------------------------------------------- |
+| 03:00      | K8s CronJob triggers `reset/reset.sh` via `viavitae-api` worker     |
+| 03:05      | Reset completes; seed hashes verified against `reset.manifest.json` |
+| 03:10      | Stripe key assertion runs (no `sk_live_*` or `pk_live_*` in seed/)  |
+| 04:00      | `demo-reset-smoke.yml` Playwright smoke test begins                 |
+| 04:15      | Smoke test results available in GitHub Actions                      |
 
 ## Reset mechanics
 

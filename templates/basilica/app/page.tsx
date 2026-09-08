@@ -9,12 +9,8 @@ export default function BasilicaHomePage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12">
       <section className="mb-12 text-center">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          Basilica of St. Vitus
-        </h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Vilnius (demo) — VIP template showcase
-        </p>
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Basilica of St. Vitus</h1>
+        <p className="mt-4 text-lg text-muted-foreground">Vilnius (demo) — VIP template showcase</p>
         <div className="mt-8">
           <AssessmentCTA templateSlug="basilica" />
         </div>

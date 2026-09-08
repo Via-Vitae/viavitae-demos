@@ -1,1 +1,9 @@
-{ "template": "online-store", "seed": 8192, "organisation": { "nameLt": "ViaVitae Parduotuvė (demo)", "nameEn": "ViaVitae Shop (demo)", "nameRu": "Магазин ViaVitae (демо)" } }
+{
+  "template": "online-store",
+  "seed": 8192,
+  "organisation": {
+    "nameLt": "ViaVitae Parduotuvė (demo)",
+    "nameEn": "ViaVitae Shop (demo)",
+    "nameRu": "Магазин ViaVitae (демо)"
+  }
+}

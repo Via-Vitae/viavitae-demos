@@ -71,8 +71,8 @@ Closes #
 <!-- One row per added dependency. Delete the table if none. -->
 
 | Package | Version | Licence | Why an existing dependency could not do this |
-| --- | --- | --- | --- |
-| | | | |
+| ------- | ------- | ------- | -------------------------------------------- |
+|         |         |         |                                              |
 
 ## GDPR and DPIA
 
@@ -81,14 +81,14 @@ Required if this change touches personal data. Under rule R5, processing may not
 start before the DPIA is complete.
 -->
 
-| Field | Value |
-| --- | --- |
-| Personal data affected | none / identify which |
-| Special category data (Art. 9), including religious belief | no / yes — condition relied on |
-| DPIA reference | n/a / DPIA-nnn |
-| New processor or subprocessor | no / name, DPA in place, EEA residency confirmed |
-| Data residency | EEA-only confirmed / exception requested — link the ADR |
-| Retention period changed | no / old and new period |
+| Field                                                      | Value                                                   |
+| ---------------------------------------------------------- | ------------------------------------------------------- |
+| Personal data affected                                     | none / identify which                                   |
+| Special category data (Art. 9), including religious belief | no / yes — condition relied on                          |
+| DPIA reference                                             | n/a / DPIA-nnn                                          |
+| New processor or subprocessor                              | no / name, DPA in place, EEA residency confirmed        |
+| Data residency                                             | EEA-only confirmed / exception requested — link the ADR |
+| Retention period changed                                   | no / old and new period                                 |
 
 ## Breaking changes and migration
 

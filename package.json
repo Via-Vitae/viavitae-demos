@@ -18,7 +18,7 @@
     "test": "turbo run test",
     "test:e2e": "playwright test",
     "verify:seed-hashes": "tsx reset/seed-hash.ts --verify",
-    "verify:media-licences": "tsx scripts/verify-media-licences.ts",
+    "verify:media-licences": "bash scripts/verify-media-licences.sh",
     "reset": "./reset/reset.sh",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

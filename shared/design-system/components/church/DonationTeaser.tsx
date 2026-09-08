@@ -25,9 +25,7 @@ export function DonationTeaser({ amount }: { amount: number }) {
       <div className="space-y-3">
         <p className="text-sm font-medium">{DEMO_BANNER_CONFIG.testModeBanner[locale]}</p>
         <p className="text-2xl font-bold">€{(amount / 100).toFixed(2)}</p>
-        <Button variant="primary">
-          {labels[locale]}
-        </Button>
+        <Button variant="primary">{labels[locale]}</Button>
       </div>
     </Card>
   );

@@ -1,1 +1,9 @@
-{ "template": "funeral-services", "seed": 2048, "organisation": { "nameLt": "Atminties laidotuvių namai (demo)", "nameEn": "Memorial Funeral Home (demo)", "nameRu": "Похоронный дом «Мемориал» (демо)" } }
+{
+  "template": "funeral-services",
+  "seed": 2048,
+  "organisation": {
+    "nameLt": "Atminties laidotuvių namai (demo)",
+    "nameEn": "Memorial Funeral Home (demo)",
+    "nameRu": "Похоронный дом «Мемориал» (демо)"
+  }
+}

@@ -16,19 +16,19 @@ that touches personal data or residency cannot be taken without it.
 Write an ADR before implementing, not after. An ADR written afterwards is a justification;
 an ADR written before is a decision.
 
-| Situation | ADR required |
-| --- | --- |
-| Introducing or replacing a framework, runtime, database or message broker | Yes |
-| Adding a third-party processor, SaaS provider, API or AI endpoint | Yes |
-| Any change to where personal data is stored, backed up or processed | Yes |
-| Changing an authentication, authorisation or tenancy mechanism | Yes |
-| Changing a retention period or a lawful basis | Yes |
-| Diverging from `viavitae-template` governance or CI defaults (rule R1) | Yes |
-| Accepting a dependency with a licence outside the allow list | Yes |
-| Accepting a known security or accessibility finding as tolerable | Yes |
-| Choosing a deployment topology, region or hosting provider | Yes |
-| A bug fix inside an existing agreed design | No |
-| Adding a test, a translation, or documentation | No |
+| Situation                                                                 | ADR required |
+| ------------------------------------------------------------------------- | ------------ |
+| Introducing or replacing a framework, runtime, database or message broker | Yes          |
+| Adding a third-party processor, SaaS provider, API or AI endpoint         | Yes          |
+| Any change to where personal data is stored, backed up or processed       | Yes          |
+| Changing an authentication, authorisation or tenancy mechanism            | Yes          |
+| Changing a retention period or a lawful basis                             | Yes          |
+| Diverging from `viavitae-template` governance or CI defaults (rule R1)    | Yes          |
+| Accepting a dependency with a licence outside the allow list              | Yes          |
+| Accepting a known security or accessibility finding as tolerable          | Yes          |
+| Choosing a deployment topology, region or hosting provider                | Yes          |
+| A bug fix inside an existing agreed design                                | No           |
+| Adding a test, a translation, or documentation                            | No           |
 
 ## Numbering convention
 
@@ -45,22 +45,22 @@ an ADR written before is a decision.
 
 ## Status values
 
-| Status | Meaning |
-| --- | --- |
-| `Proposed` | Under discussion. Implementation must not start. |
-| `Accepted` | Agreed and in force. Implementation may proceed. |
-| `Deprecated` | No longer applies to new work; existing systems may still depend on it. |
-| `Superseded by ADR-MMM` | Replaced. Kept for history, links updated to the successor. |
-| `Rejected` | Considered and declined. Kept so the question is not re-litigated. |
+| Status                  | Meaning                                                                 |
+| ----------------------- | ----------------------------------------------------------------------- |
+| `Proposed`              | Under discussion. Implementation must not start.                        |
+| `Accepted`              | Agreed and in force. Implementation may proceed.                        |
+| `Deprecated`            | No longer applies to new work; existing systems may still depend on it. |
+| `Superseded by ADR-MMM` | Replaced. Kept for history, links updated to the successor.             |
+| `Rejected`              | Considered and declined. Kept so the question is not re-litigated.      |
 
 ---
 
 ## Index
 
-| ADR | Title | Status | Owner | Date |
-| --- | --- | --- | --- | --- |
+| ADR                                                                    | Title                                              | Status   | Owner      | Date       |
+| ---------------------------------------------------------------------- | -------------------------------------------------- | -------- | ---------- | ---------- |
 | [ADR-001](#adr-001-adopt-viavitae-template-as-the-repository-baseline) | Adopt viavitae-template as the repository baseline | Accepted | Architects | 2026-09-06 |
-| _ADR-002_ | _next available number_ | — | — | — |
+| _ADR-002_                                                              | _next available number_                            | —        | —          | —          |
 
 New records are added at the end of this file and referenced from the table above, in the
 same pull request. An ADR that is not in the index has not been made.
@@ -69,15 +69,15 @@ same pull request. An ADR that is not in the index has not been made.
 
 ## ADR-001: Adopt viavitae-template as the repository baseline
 
-| Field | Value |
-| --- | --- |
-| **Status** | Accepted |
-| **Owner** | `@JourneyOfLife` |
-| **Date** | 2026-09-06 |
-| **Deciders** | Architects, Security, Compliance, DPO |
-| **Consulted** | Platform, Legal |
-| **Supersedes** | — |
-| **Superseded by** | — |
+| Field             | Value                                 |
+| ----------------- | ------------------------------------- |
+| **Status**        | Accepted                              |
+| **Owner**         | `@JourneyOfLife`                      |
+| **Date**          | 2026-09-06                            |
+| **Deciders**      | Architects, Security, Compliance, DPO |
+| **Consulted**     | Platform, Legal                       |
+| **Supersedes**    | —                                     |
+| **Superseded by** | —                                     |
 
 ### Context
 
@@ -146,27 +146,27 @@ Specifically:
 
 ### Alternatives considered
 
-| Alternative | Why rejected |
-| --- | --- |
-| Keep per-repository hand-maintained governance | This is the status quo that produced inconsistent secret scanning, unresolved ownership and a silently dead gate. It does not produce auditable evidence. |
-| A monorepo containing all ten projects | Simplifies propagation but conflicts with the repository index, with per-repository ownership and licensing, with the marketplace fork's upstream sync requirement, and with GitHub's template-repository feature. It also widens the blast radius of any single credential compromise to every product. |
-| An external configuration-management tool that pushes governance into each repository | Adds a moving part and a credential with write access to every repository, and the pushed state drifts the moment someone edits a file directly. A template plus a presence gate achieves the same guarantee with no additional secret. |
-| GitHub organisation-level defaults only, without a template | Organisation defaults cover community-health files but cannot supply CI, dependency configuration, ADR and DPIA structure. They complement the template; they do not replace it. |
-| Adopt an existing public enterprise template | None carried the EU data-residency constraint, the GDPR Article 33 breach workflow, WCAG 2.2 AA as a merge gate, or the Article 9 handling that a church vertical requires. Adapting one would cost more than writing one. |
+| Alternative                                                                           | Why rejected                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Keep per-repository hand-maintained governance                                        | This is the status quo that produced inconsistent secret scanning, unresolved ownership and a silently dead gate. It does not produce auditable evidence.                                                                                                                                                |
+| A monorepo containing all ten projects                                                | Simplifies propagation but conflicts with the repository index, with per-repository ownership and licensing, with the marketplace fork's upstream sync requirement, and with GitHub's template-repository feature. It also widens the blast radius of any single credential compromise to every product. |
+| An external configuration-management tool that pushes governance into each repository | Adds a moving part and a credential with write access to every repository, and the pushed state drifts the moment someone edits a file directly. A template plus a presence gate achieves the same guarantee with no additional secret.                                                                  |
+| GitHub organisation-level defaults only, without a template                           | Organisation defaults cover community-health files but cannot supply CI, dependency configuration, ADR and DPIA structure. They complement the template; they do not replace it.                                                                                                                         |
+| Adopt an existing public enterprise template                                          | None carried the EU data-residency constraint, the GDPR Article 33 breach workflow, WCAG 2.2 AA as a merge gate, or the Article 9 handling that a church vertical requires. Adapting one would cost more than writing one.                                                                               |
 
 ### Compliance impact
 
-| Area | Impact |
-| --- | --- |
-| GDPR | Positive. Makes the DPIA requirement discoverable in every repository and ties it to rule R5, so an assessment is raised before processing starts rather than after. |
+| Area                         | Impact                                                                                                                                                                      |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GDPR                         | Positive. Makes the DPIA requirement discoverable in every repository and ties it to rule R5, so an assessment is raised before processing starts rather than after.        |
 | Article 9 special categories | Positive. The DPIA template and the feature-request form both ask explicitly about religious belief, which is the sensitive category most likely to arise in this vertical. |
-| Data residency | Positive. The template states the EEA constraint in `README.md`, `SECURITY.md` and `QODER.md`, and makes it a stop-condition under QODER rule 7. |
-| Breach notification, Art. 33 | Positive. One disclosure and breach workflow, identical in every repository, with a documented 72-hour path. |
-| Accessibility, WCAG 2.2 AA | Positive. Present in the pull-request checklist and as a QODER stop-condition, so it is raised at design time. |
-| Licensing | Positive. The allow list is enforced mechanically rather than by memory, and an unknown licence fails closed. |
-| Supply chain | Positive. SHA pinning plus least-privilege tokens reduce the risk that a compromised upstream action reaches a repository holding personal data. |
-| New processors introduced | None. The template introduces no third-party service. |
-| Personal data processed | None. The template contains no personal data. |
+| Data residency               | Positive. The template states the EEA constraint in `README.md`, `SECURITY.md` and `QODER.md`, and makes it a stop-condition under QODER rule 7.                            |
+| Breach notification, Art. 33 | Positive. One disclosure and breach workflow, identical in every repository, with a documented 72-hour path.                                                                |
+| Accessibility, WCAG 2.2 AA   | Positive. Present in the pull-request checklist and as a QODER stop-condition, so it is raised at design time.                                                              |
+| Licensing                    | Positive. The allow list is enforced mechanically rather than by memory, and an unknown licence fails closed.                                                               |
+| Supply chain                 | Positive. SHA pinning plus least-privilege tokens reduce the risk that a compromised upstream action reaches a repository holding personal data.                            |
+| New processors introduced    | None. The template introduces no third-party service.                                                                                                                       |
+| Personal data processed      | None. The template contains no personal data.                                                                                                                               |
 
 ---
 
@@ -178,15 +178,15 @@ number from the index, and add the index row in the same pull request.
 ```markdown
 ## ADR-NNN: <short title in sentence case>
 
-| Field | Value |
-| --- | --- |
-| **Status** | Proposed |
-| **Owner** | <team handle, for example @JourneyOfLife> |
-| **Date** | <YYYY-MM-DD> |
-| **Deciders** | <roles and teams that agreed> |
-| **Consulted** | <roles and teams whose input was sought> |
-| **Supersedes** | <ADR-NNN or —> |
-| **Superseded by** | <ADR-NNN or —> |
+| Field             | Value                                     |
+| ----------------- | ----------------------------------------- |
+| **Status**        | Proposed                                  |
+| **Owner**         | <team handle, for example @JourneyOfLife> |
+| **Date**          | <YYYY-MM-DD>                              |
+| **Deciders**      | <roles and teams that agreed>             |
+| **Consulted**     | <roles and teams whose input was sought>  |
+| **Supersedes**    | <ADR-NNN or —>                            |
+| **Superseded by** | <ADR-NNN or —>                            |
 
 ### Context
 

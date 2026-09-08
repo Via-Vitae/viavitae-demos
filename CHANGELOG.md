@@ -11,17 +11,17 @@ commit, not in the changelog.
 
 ## Commit types
 
-| Type | Changelog section | Meaning |
-| --- | --- | --- |
-| `feat` | **Added** | A new feature. |
-| `fix` | **Fixed** | A bug fix. |
-| `perf` | **Changed** | A code change that improves performance. |
-| `refactor` | **Changed** | A code change that neither fixes a bug nor adds a feature. |
-| `docs` | **Documentation** | Documentation-only changes. |
-| `test` | not released | Adding or correcting tests. |
-| `build` / `ci` | **Infrastructure** | Build system, dependencies, or CI changes. |
-| `chore` | not released | Other changes that do not modify source or tests. |
-| `revert` | **Reverted** | Reverting a previous commit. |
+| Type           | Changelog section  | Meaning                                                    |
+| -------------- | ------------------ | ---------------------------------------------------------- |
+| `feat`         | **Added**          | A new feature.                                             |
+| `fix`          | **Fixed**          | A bug fix.                                                 |
+| `perf`         | **Changed**        | A code change that improves performance.                   |
+| `refactor`     | **Changed**        | A code change that neither fixes a bug nor adds a feature. |
+| `docs`         | **Documentation**  | Documentation-only changes.                                |
+| `test`         | not released       | Adding or correcting tests.                                |
+| `build` / `ci` | **Infrastructure** | Build system, dependencies, or CI changes.                 |
+| `chore`        | not released       | Other changes that do not modify source or tests.          |
+| `revert`       | **Reverted**       | Reverting a previous commit.                               |
 
 Append `!` after the type or scope, and add a `BREAKING CHANGE:` footer, to mark a
 **breaking change**. Breaking changes trigger a major version bump and are called out at

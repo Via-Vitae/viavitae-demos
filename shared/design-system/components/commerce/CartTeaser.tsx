@@ -11,9 +11,7 @@ import { Button } from "../ui/Button";
 export function CartTeaser({ itemCount, totalCents }: { itemCount: number; totalCents: number }) {
   return (
     <Button variant="ghost" size="sm" className="relative">
-      <span aria-label={`${itemCount} items in cart`}>
-        🛒 {itemCount}
-      </span>
+      <span aria-label={`${itemCount} items in cart`}>🛒 {itemCount}</span>
       {itemCount > 0 && (
         <Badge variant="default" className="absolute -right-1 -top-1 h-5 w-5 p-0 text-[10px]">
           {itemCount}

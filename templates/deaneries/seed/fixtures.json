@@ -1,1 +1,9 @@
-{ "template": "deaneries", "seed": 512, "organisation": { "nameLt": "Vilniaus I dekanatas (demo)", "nameEn": "Vilnius I Deanery (demo)", "nameRu": "Вильнюсский I деканат (демо)" } }
+{
+  "template": "deaneries",
+  "seed": 512,
+  "organisation": {
+    "nameLt": "Vilniaus I dekanatas (demo)",
+    "nameEn": "Vilnius I Deanery (demo)",
+    "nameRu": "Вильнюсский I деканат (демо)"
+  }
+}

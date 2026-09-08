@@ -31,9 +31,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
  *
  * Returns a Cal.com booking URL on success.
  */
-export async function submitAssessment(
-  payload: AssessmentPayload,
-): Promise<AssessmentResponse> {
+export async function submitAssessment(payload: AssessmentPayload): Promise<AssessmentResponse> {
   const res = await fetch(`${API_BASE}/v1/assessment`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

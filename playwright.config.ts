@@ -1,8 +1,15 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const TEMPLATES = [
-  "basilica", "cathedral", "diocese", "deaneries", "parish-church",
-  "funeral-services", "cemetery-services", "online-store", "vendor-dashboard",
+  "basilica",
+  "cathedral",
+  "diocese",
+  "deaneries",
+  "parish-church",
+  "funeral-services",
+  "cemetery-services",
+  "online-store",
+  "vendor-dashboard",
 ];
 
 const BASE_URL = process.env.DEMO_BASE_URL ?? "http://localhost:3000";
