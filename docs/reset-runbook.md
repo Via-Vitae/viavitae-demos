@@ -79,7 +79,7 @@ file upload, or incomplete reset from a previous night).
 2. Identify how the live key entered seed data (check git history, CI logs).
 3. Remove the key from all seed files and commit the fix.
 4. Record the incident as an ADR in `docs/architecture.md`.
-5. Notify `security@viavitae.com`.
+5. Notify `journey4oflife+viavitae.security@gmail.com`.
 
 ### Smoke test failure
 

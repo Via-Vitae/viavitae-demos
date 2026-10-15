@@ -47,7 +47,7 @@ assert_no_live_keys() {
     echo "║  This is a SECURITY INCIDENT.                               ║"
     echo "║  1. Rotate the key immediately in the Stripe dashboard.     ║"
     echo "║  2. Remove the key from all seed files.                     ║"
-    echo "║  3. Notify security@viavitae.com                            ║"
+    echo "║  3. Notify journey4oflife+viavitae.security@gmail.com                            ║"
     echo "╚══════════════════════════════════════════════════════════════╝"
     exit 2
   fi
