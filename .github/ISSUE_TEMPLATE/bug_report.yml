@@ -10,7 +10,7 @@ body:
         Thank you for reporting a bug. Before submitting, confirm the issue
         is not caused by the nightly reset (check `docs/reset-runbook.md`).
         If this is a **security vulnerability**, do NOT use this form —
-        email `security@viavitae.com` instead (see SECURITY.md).
+        email `journey4oflife+viavitae.security@gmail.com` instead (see SECURITY.md).
 
   - type: input
     id: affected-demo
